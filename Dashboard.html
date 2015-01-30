@@ -1,0 +1,147 @@
+<!--
+//-----------------------------------------------------------------------------------------------------
+// File Name:	 Dashboard.html
+// Purpose:	   	 This HTML will contain all the meeting invite in the tabular form and conatins the timer.
+//------------------------------------------------------------------------------------------------------
+// Changes History:
+//----------------------------------------------|---------------|---------------------------------------
+//  Author:       		Laksh Lumba
+//  Supervisor:   		Laksh
+//  Change Date:  		01/01/2015
+//  Change Description: This HTML will contain all the meeting invite in the tabular form and conatins the timer.
+//----------------------------------------------------------------
+//@ Copyright Northeastern University, 2015.
+//This document contains proprietary and confidential
+//information, and shall not be reproduced, transferred, or
+//disclosed to others, without the prior written consent of Laksh Lumba.
+//-------------------------------------------------------------------------------------------------------->
+
+<!DOCTYPE HTML>
+<html>
+
+<head>
+	<title>Meeting Agenda Timer</title>
+	<meta name="description" content="website description" />
+	<meta name="keywords" content="website keywords, website keywords" />
+	<meta http-equiv="content-type" content="text/html; charset=windows-1252" />  
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>  
+	<link rel="stylesheet" href="js/clock/compiled/flipclock.css">
+	<script src="js/clock/compiled/flipclock.min.js"></script>
+	<link rel="stylesheet" type="text/css" href="style/style.css" title="style"/>
+	<script type="text/javascript">
+		$( document ).ready(function() {
+			var meetingRequestData = JSON.parse(localStorage.getItem("jsondata"));
+			//create the row table data along with json object
+			var startTimer = [];
+			for(i = 0 ; i < 8 ; i++){
+				var value1 = meetingRequestData.items[i]["id"];
+				// Find a <table> element with id="meetingData":
+				if ("NA" != value1){
+					var table = document.getElementById("meetingData");
+					// Create an empty <tr> element and add it to the 1st position of the table:
+					var row = table.insertRow(i+1);
+					// Insert new cells (<td> elements) at the 1st and 2nd position of the "new" <tr> element:
+					var cell1 = row.insertCell(0);
+					var cell2 = row.insertCell(1);
+					var cell3 = row.insertCell(2);
+					var cell4 = row.insertCell(3);
+					var cell5 = row.insertCell(4);
+					var cell6 = row.insertCell(5);
+					var cell7 = row.insertCell(6);
+					var cell8 = row.insertCell(7);
+					// Add some text to the new cells:
+					cell1.innerHTML = meetingRequestData.items[i]["id"];
+					cell2.innerHTML = meetingRequestData.items[i]["title"];
+					cell3.innerHTML = meetingRequestData.items[i]["description"];
+					cell4.innerHTML = meetingRequestData.items[i]["meetingDate"];
+					cell5.innerHTML = meetingRequestData.items[i]["startTime"];
+					cell6.innerHTML = meetingRequestData.items[i]["endTime"];
+					cell7.innerHTML = meetingRequestData.items[i]["totalTime"];					
+					var totalTime = meetingRequestData.items[i]["totalTime"];
+					var meetingTitle = meetingRequestData.items[i]["title"];
+					totalTime = totalTime/60;
+					startTimer[i] = document.createElement("input");
+					startTimer[i].type = "submit";
+					startTimer[i].value = "StartTimer";
+					startTimer[i].name = "StartTime" + i;
+					startTimer[i].setAttribute("onclick", "startClock('" + totalTime + "','" + meetingTitle + "')");					
+					//startTimer[i].onclick = startClock;
+					cell8.appendChild(startTimer[i]);
+				}
+			}
+		});
+	</script>
+</head>
+
+<body>
+  <div id="main">
+    <div id="header">
+      <div id="logo">
+        <div id="logo_text">
+          <!-- class="logo_colour", allows you to change the colour of the text -->
+          <h1><a href="MeetingTimer.html">Meeting Agenda Timer</a></h1>
+          <h2>Meeting Agenda Timer</h2>
+        </div>
+      </div>
+      <div id="menubar">
+        <ul id="menu">
+          <!-- put class="selected" in the li tag for the selected page - to highlight which page you're on -->
+           <li><a href="MeetingTimer.html">Home</a></li>
+          <li><a href="CreateEvent.html">Create Event</a></li>
+          <li class="selected" ><a href="Dashboard.html">Dashboard</a></li>
+        </ul>
+      </div>
+    </div>
+    <div id="site_content">
+		<div id="content">
+		<h2>Meeting List</h2>
+        <table id="meetingData" style="width:130%; border-spacing:0;">
+          <tr><th>Item ID</th><th>Title</th><th>Description</th><th>Meeting Date</th><th>Start Time</th><th>End Time</th><th>Total Time(Seconds)</th><th>Start Timer</th></tr>
+        </table>
+		
+		<h1 id ="currentMeetingRunning">Schedule Meeting</h1>
+		<div id="clock"  class="clock" style="margin:2em;"></div>
+			<script type="text/javascript">
+				var clock;
+				var colorGreen;
+				var colorYellow;
+				var colorRed;
+				function startClock(seconds,meetingTitle) {
+					// Instantiate a counter
+					clock = new FlipClock($('.clock'), seconds, {
+						clockFace: 'Counter',
+						autoStart: true,
+						countdown: true
+					});
+					document.getElementById("currentMeetingRunning").innerHTML = meetingTitle;
+					startTimer(seconds);
+				};
+				function startTimer(seconds){
+					clearTimeout(colorGreen);clearTimeout(colorYellow);clearTimeout(colorRed);
+					document.getElementById('site_content').style.backgroundColor = "white";
+					var lessThanThirty = (.7 * seconds)*1000;
+					var lessThanfifteen = (.85 * seconds)*1000;
+					var lessThanFive = (.95 * seconds)*1000;
+					colorGreen = setTimeout(changeColorGreen, lessThanThirty);		
+					colorYellow = setTimeout(changeColorYellow, lessThanfifteen);
+					colorRed = setTimeout(changeColorRed, lessThanFive);
+				}
+				function changeColorRed(){
+					document.getElementById('site_content').style.backgroundColor = "red";
+				}				
+				function changeColorGreen(){
+					document.getElementById('site_content').style.backgroundColor = "green";
+				}				
+				function changeColorYellow(){
+					document.getElementById('site_content').style.backgroundColor = "yellow";
+				}
+			</script>
+				
+		</div>
+    </div>
+    <div id="footer">
+      Copyright &copy; Laksh Lumba | Northeastern University 
+    </div>
+  </div>
+</body>
+</html>

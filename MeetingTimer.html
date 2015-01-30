@@ -1,0 +1,79 @@
+<!--
+//-----------------------------------------------------------------------------------------------------
+// File Name:	 CreateEvent.html
+// Purpose:	   	 This HTML is used to create the meeting invites
+//------------------------------------------------------------------------------------------------------
+// Changes History:
+//----------------------------------------------|---------------|---------------------------------------
+//  Author:       		Laksh Lumba
+//  Supervisor:   		Laksh
+//  Change Date:  		01/01/2015
+//  Change Description: This HTML is used to create the meeting invites
+//----------------------------------------------------------------
+//@ Copyright Northeastern University, 2015.
+//This document contains proprietary and confidential
+//information, and shall not be reproduced, transferred, or
+//disclosed to others, without the prior written consent of Laksh Lumba.
+//-------------------------------------------------------------------------------------------------------->
+
+<!DOCTYPE HTML>
+<html>
+
+<head>
+  <title>Meeting Agenda Timer</title>
+  <meta name="description" content="website description" />
+  <meta name="keywords" content="website keywords, website keywords" />
+  <meta http-equiv="content-type" content="text/html; charset=windows-1252" />
+  <script src="//ajax.googleapis.com/ajax/libs/dojo/1.6.3/dojo/dojo.xd.js"></script>
+  <link rel="stylesheet" type="text/css" href="style/style.css" title="style" />
+</head>
+
+<body>
+  <div id="main">
+    <div id="header">
+      <div id="logo">
+        <div id="logo_text">
+          <!-- class="logo_colour", allows you to change the colour of the text -->
+          <h1><a href="MeetingTimer.html">Meeting Agenda Timer</a></h1>
+          <h2>Meeting Agenda Timer</h2>
+        </div>
+      </div>
+      <div id="menubar">
+        <ul id="menu">
+          <!-- put class="selected" in the li tag for the selected page - to highlight which page you're on -->
+          <li class="selected"><a href="MeetingTimer.html">Home</a></li>
+          <li><a href="CreateEvent.html">Create Event</a></li>
+        </ul>
+      </div>
+    </div>
+    <div id="site_content">
+      <div id="content">
+        <!-- insert the page content here -->		
+        <h1>Meeting Agenda Timer</h1>
+        <p>App will be used to help make sure a meeting involving several talks stays on schedule.</p>
+        <p>Following are the functionality:</p>
+        <ol>
+          <li>User can schedule maximum of 8 meetings</li>
+          <li>User can enter the Title, Description, Date and Time of eack talk</li>
+          <li>User can see list of talks in tabular form</li>
+          <li>Proper timer is provided for each talk</li>
+        </ol>
+		<p>Color display according to the timer</p>
+        <ol>
+          <li>White color will be displayed, if more than 30% time remaining</li>
+          <li>Green color will be displayed, if less than 30% time remaining</li>
+          <li>Yellow color will be displayed, if less than 15% time remaining</li>
+          <li>Red color will be displayed, if less than 5% time remaining</li>
+        </ol>
+		<p>Technology used:</p>
+        <ol>
+          <li>HTML,CSS,JQuery,JavaScript </li>
+        </ol>
+      </div>
+    </div>
+    <div id="footer">
+      Copyright &copy; Laksh Lumba | Northeastern University
+    </div>
+  </div>
+</body>
+</html>
